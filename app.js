@@ -163,8 +163,8 @@
   }
 
   window.addEventListener("load", function() {
-    var controlSocket = new WebSocket("ws://localhost:8765/")
-    var statsSocket = new WebSocket("ws://localhost:9876/")
+    var controlSocket = new WebSocket("ws://172.30.159.86:8765/")
+    var statsSocket = new WebSocket("ws://172.30.159.86:9876/")
     var keyboardMovement = createKeyboardMovementAdapter(window).connect()
     var webSocketMovement = createWebSocketMovementAdapter(controlSocket).connect()
     var movementAnnouncer = createMovementAnnouncer(controlSocket, keyboardMovement).connect()
