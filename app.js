@@ -92,7 +92,7 @@
     var self = beget(createMovementAdapter())
 
     self.connect = function() {
-      window.addEventListener("keyup", function(event) {
+      win.addEventListener("keyup", function(event) {
         if (event.keyCode == 37) {
           self.triggerPrevious()
         } else if (event.keyCode == 39) {
@@ -101,6 +101,18 @@
       })
 
       return self
+    }
+
+    return self
+  }
+
+  var createMouseMovementAdapter = function(win) {
+    var self = beget(createMovementAdapter())
+
+    self.connect = function() {
+      win.addEventListener("mouseup", function() {
+        self.triggerNext()
+      })
     }
 
     return self
@@ -166,6 +178,7 @@
     var controlSocket = new WebSocket("ws://172.30.159.86:8765/")
     var statsSocket = new WebSocket("ws://172.30.159.86:9876/")
     var keyboardMovement = createKeyboardMovementAdapter(window).connect()
+    var mouseMovementAdapter = createMouseMovementAdapter(window).connect()
     var webSocketMovement = createWebSocketMovementAdapter(controlSocket).connect()
     var movementAnnouncer = createMovementAnnouncer(controlSocket, keyboardMovement).connect()
     var movementAdapter = createMovementMultiAdapter(webSocketMovement, movementAnnouncer)
